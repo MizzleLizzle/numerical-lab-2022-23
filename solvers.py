@@ -90,7 +90,7 @@ def fixed_point(f: Callable[[float], float], x: float, max_iterations: int, tole
     raise NoRootFoundException
 
 
-def fixed_point_errors(f: Callable[[float], float], x: float, max_iterations: int, tolerance: float) -> float:
+def fixed_point_error_series(f: Callable[[float], float], x: float, max_iterations: int, tolerance: float) -> float:
     errors = [x]
     for _ in range(max_iterations):
         x = f(x)
