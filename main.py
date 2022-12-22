@@ -1,7 +1,6 @@
 from solvers import newtons_error_series, secant_error_series, bisection_error_series, fixed_point_error_series, fixed_point
 from example_functions import f_1, f_1_prime, g_1_b, g_1_a, g_2_a, g_2_b
 import matplotlib.pyplot as plt
-from sys import float_info
 
 
 def plot_errors(f, f_prime, g, tolerance):
