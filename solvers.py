@@ -47,9 +47,7 @@ def secant_error_series(f: Callable[[float], float], x_0: float, x_1: float, max
 
 def bisection(f: Callable[[float], float], a: float, b: float, max_iterations: int, tolerance: float) -> float:
     def sign(y: float) -> int:
-        if y >= 0:
-            return 1
-        return -1
+        return y / abs(y) if y != 0 else 0
 
     for _ in range(max_iterations):
         x = (a+b)/2
@@ -64,9 +62,7 @@ def bisection(f: Callable[[float], float], a: float, b: float, max_iterations: i
 
 def bisection_error_series(f: Callable[[float], float], a: float, b: float, max_iterations: int, tolerance: float) -> list[float]:
     def sign(y: float) -> int:
-        if y >= 0:
-            return 1
-        return -1
+        return y / abs(y) if y != 0 else 0
 
     errors = [b]
     for _ in range(max_iterations):
@@ -81,19 +77,19 @@ def bisection_error_series(f: Callable[[float], float], a: float, b: float, max_
     raise NoRootFoundException
 
 
-def fixed_point(f: Callable[[float], float], x: float, max_iterations: int, tolerance: float) -> float:
+def fixed_point(f: Callable[[float], float], g: Callable[[float], float], x: float, max_iterations: int, tolerance: float) -> float:
     for _ in range(max_iterations):
-        x = f(x)
-        if abs(f(x)-x) < tolerance:
+        x = g(x)
+        if abs(f(x)) < tolerance:
             return x
     raise NoRootFoundException
 
 
-def fixed_point_error_series(f: Callable[[float], float], x: float, max_iterations: int, tolerance: float) -> list[float]:
+def fixed_point_error_series(f: Callable[[float], float], g: Callable[[float], float], x: float, max_iterations: int, tolerance: float) -> list[float]:
     errors = [x]
     for _ in range(max_iterations):
-        x = f(x)
+        x = g(x)
         errors.append(x)
-        if abs(f(x)-x) < tolerance:
+        if abs(f(x)) < tolerance:
             return [abs(x-y) for y in errors]
     raise NoRootFoundException
