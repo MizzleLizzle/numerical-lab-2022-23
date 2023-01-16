@@ -21,8 +21,7 @@ def plot_errors(f, f_prime, g, tolerance, index=None):
     ax.plot(range(len(secant_errors)), secant_errors, label='Sekant')
     ax.plot(range(len(bisection_errors)), bisection_errors, label='Bisektion')
 
-    ax.set(xlabel='Iterationen', ylabel='Fehler',
-           title='Fehlervergleich '+f.__name__)
+    ax.set(xlabel='Iterationen', ylabel='Fehler')
 
     ax.legend()
     ax.set_yscale('symlog')
@@ -30,12 +29,12 @@ def plot_errors(f, f_prime, g, tolerance, index=None):
     ylabels = ['%.3f' % (label._y) for label in ax.get_yticklabels()]
     ax.set_yticklabels(ylabels)
 
-    filename = "plot.png" if not index else f"plot{index}.png"
+    filename = "plot.pdf" if not index else f"plot{index}.pdf"
 
     plt.savefig(
         filename,
         dpi='figure',
-        format="png",
+        format="pdf",
         pad_inches=0.1,
         bbox_inches="tight"
     )
