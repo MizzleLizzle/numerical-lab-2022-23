@@ -13,7 +13,7 @@ def plot_errors(f, f_prime, g, tolerance, index=None):
         fixed_point_errors = fixed_point_error_series(
             f, g, 1, 10000, tolerance)
         ax.plot(range(len(fixed_point_errors)),
-                fixed_point_errors, label='Fixpunkt '+g.__name__)
+                fixed_point_errors, label='Fixpunkt')
     except:
         fixed_point_errors = None
 

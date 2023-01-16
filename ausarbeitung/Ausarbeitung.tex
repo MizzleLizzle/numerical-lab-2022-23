@@ -105,6 +105,30 @@
 { \textbf{Matrikelnummern:}} \ 3704083  \& 3739341 \hspace{\fill} \\
 	\hrule
 	\section*{Diagramme}
-	\subsection*{$f_1(x) = x + e^x-2$}
+	Es wurde jewiels die Funktion $g$ gewählt mit der das Fixpunktverfahren tatsächlich ein Ergebnis liefert (mehr dazu im Vergleich der Verfahren).
+	\subsection*{$f_1(x) = x + e^x-2, g_{1,b}(x)=log(2-x)$}
 	\includegraphics[width=\textwidth]{plot.pdf}
+	\subsection*{$f_2(x) = 2x - tan(x), g_{2,b}(x)=arctan(2x)$}
+	\includegraphics[width=\textwidth]{plot1.pdf}
+	\subsection*{$f_{3,2}(x) = -2x^2 + 4$}
+	\includegraphics[width=\textwidth]{plot2.pdf}
+	\subsection*{$f_{3,1}(x) = -x^2 + 2$}
+	\includegraphics[width=\textwidth]{plot3.pdf}
+	\subsection*{$f_{3,\frac{1}{4}}(x) = -\frac{1}{4}x^2 +\frac{1}{2},  g_{3,\frac{1}{4}}(x)=-\frac{1}{4}x^2 + x + \frac{1}{2}$}
+	\includegraphics[width=\textwidth]{plot4.pdf}
+	\section*{Vergleich der Verfahren}
+	Hier noch einige erhobene Daten zusammengefasst:
+	\begin{table}[]
+		\begin{tabular}{lllll}
+									  & Newton's Verfahren & Sekanten Verfahren & Bisektions Verfahren & Fixpunkt Verfahren \\
+		Durchscnittliche Iterationen & 4.4                & 5                  & 15                   & 13.333             \\
+		Maximale Iterationen          & 6                  & 6                  & 17                   & 23                 \\
+		\end{tabular}
+	\end{table}
+	Beim betrachten dieser Daten ist zu beachten, dass lediglich 3 Datenpunkte zum Fixpunktverfahren existieren.
+	Stichpunkte:
+	Newton und Sekant klar am schnellsten, kleiner vorteil für newton evtl dadurch ausgeglichen, dass bei sekant nicht symbolisch differenziert werden muss
+	Fixpunkt funktioniert nur für geschickt gewählte funktionen (Kontraktion)
+	Für bisektion muss ungefähr bekannt sein wo die nullstelle liegt
+
 \end{document}
