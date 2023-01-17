@@ -4,3 +4,4 @@ __pycache__
 
 /ausarbeitung/*
 !/ausarbeitung/Ausarbeitung.tex
+!/ausarbeitung/plots/
