@@ -1,6 +1,7 @@
 .vscode
 venv
 __pycache__
+plots
 
 /ausarbeitung/*
 !/ausarbeitung/Ausarbeitung.tex
