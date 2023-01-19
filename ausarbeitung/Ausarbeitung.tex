@@ -1,8 +1,18 @@
+\documentclass[a4paper,12pt]{article}
+%\documentclass[a4paper,12pt,twoside]{book}
 
-% \documentclass[12pt]{article}
-\documentclass[10pt]{scrartcl}
-\title{Algebra I}
-\nonstopmode
+\usepackage[margin=3.5cm]{geometry}
+
+\usepackage[utf8x]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{longtable}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{epsfig}
 %\usepackage[utf-8]{inputenc}
 \usepackage{graphicx} % Required for including pictures
 % \usepackage[figurename=Figure]{caption}
@@ -141,18 +151,20 @@ Beim Bisektionsverfahren beginnen wir mit einem Startintervall $[a_0, b_0] \subs
 		b_n\text{ sonst}
 	\end{cases}
 \]
-Dem Informatikaffinen Leser fällt vielleicht die ähnlichkeit zur binären Suche auf.
+Dem informatikaffinen Leser fällt vielleicht die ähnlichkeit zur binären Suche auf.
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=0.75\textwidth]{plots/Bisection_method.png}
 	\caption{Veranschaulichung einiger Iterationsschritte des Bisektionsverfahrens}
 \end{figure}
 \subsection*{Fixpunktverfahren}
-
-
+Das Fixpunktverfahren sucht im Gegensatz zu den bisher erwähnten Algorithmen eine Lösung der Gleichung $g(x)=x$. Daher muss erst $f(x)=0$ entsprechend umgeformt werden. Anschliessend wählen wir einen Anfangswert $x_0\in[0,1]$ und wenden wiederholt $g$ darauf an:
+\[
+	x_{n+1}=g(x_n)
+\]
 \section*{Diagramme}
 \subsection*{Benötigte Iterationen}
-Es wurde jewiels die Funktion $g$ gewählt mit der das Fixpunktverfahren tatsächlich ein Ergebnis liefert (mehr dazu im Vergleich der Verfahren).
+Hier wurde für Verfahren mit einem Benötigtem Startwert Es wurde jewiels die Funktion $g$ gewählt mit der das Fixpunktverfahren tatsächlich ein Ergebnis liefert (mehr dazu im Vergleich der Verfahren).
 
 \begin{figure}[!h]
 	\centering

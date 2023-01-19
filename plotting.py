@@ -7,7 +7,7 @@ def plot_errors(f, f_prime, g, tolerance, index=None):
 
     newtons_errors = newtons_error_series(f, f_prime, 1, 10000, tolerance)
     secant_errors = secant_error_series(f, 0, 1, 10000, tolerance)
-    bisection_errors = bisection_error_series(f, 0, 2, 10000, tolerance)
+    bisection_errors = bisection_error_series(f, 0, 1, 10000, tolerance)
     try:
         fixed_point_errors = fixed_point_error_series(
             f, g, 1, 10000, tolerance)
@@ -67,3 +67,4 @@ def plot_fixed_point_iterations_by_starting_point(f, g, max_iteratons, tolerance
     plt.show()
 
 def plot_secant_iterations_by_starting_point(f, max_iterations, tolerance):
+    pass
