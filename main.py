@@ -2,13 +2,21 @@ from solvers import newtons_error_series, secant_error_series, bisection_error_s
 from example_functions import functions, f_2, f_1, f_1_prime, g_1_b
 import matplotlib.pyplot as plt
 from plotting import *
+import os
 
 
 def main():
+    try:
+        if not os.path.exists("./plots"):
+            os.makedirs("./plots")
+    except OSError:
+        print ('Error: Could not create directory for plots')
+
     stats = []
     for index, function in enumerate(functions):
         f, f_prime, g, root = function["f"], function["f_prime"], function["g"], function["root"]
         stats.append(plot_errors(f, f_prime, g, 0.0000001, root, index))
+    
     newton_mean, secant_mean, bisection_mean, fixed_point_mean = 0, 0, 0, 0
     for stat in stats:
         newton_mean += stat["newton"]
@@ -28,6 +36,8 @@ def main():
     plot_newton_iterations_by_starting_point(f, f_prime, 10000, 0.0001, root)
     plot_secant_iterations_by_starting_points_distance(f, 10000, 0.0001, root)
     plot_secant_iterations_by_midpoint_of_starting_points(f, 10000, 0.0001, root)
+    plot_bisection_iterations_by_intervall_size(f, 10000, 0.0001, root)
+    plot_bisection_iterations_by_relative_root_position(f, 10000, 0.0001, root)
 
 
 if __name__ == '__main__':
