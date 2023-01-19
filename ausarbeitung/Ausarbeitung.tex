@@ -104,48 +104,95 @@
 \end{center}
 {\textbf{Name:}\ Mikael Lux \& Ulf Gerking\hspace{\fill} \textbf{Abgabedatum:} tbd}\\
 { \textbf{Matrikelnummern:}} \ 3704083  \& 3739341 \hspace{\fill} \\
-	\hrule
-	\section*{Diagramme}
-	Es wurde jewiels die Funktion $g$ gewählt mit der das Fixpunktverfahren tatsächlich ein Ergebnis liefert (mehr dazu im Vergleich der Verfahren).
-	
-	\begin{figure}[!h]
-		\centering
-		\begin{subfigure}[b]{0.4\textwidth}
-			\caption*{$f_1(x) = x + e^x-2, g_{1,b}(x)=\log(2-x)$}
-			\includegraphics[width=\textwidth]{plots/plot.pdf}
-		\end{subfigure}
-		\begin{subfigure}[b]{0.4\textwidth}
-			\caption*{$f_2(x) = 2x - \tan(x), g_{2,b}(x)=\arctan(2x)$}
-			\includegraphics[width=\textwidth]{plots/plot1.pdf}
-		\end{subfigure}
-		\begin{subfigure}[b]{0.4\textwidth}
-			\caption*{$f_{3,2}(x) = -2x^2 + 4$}
-			\includegraphics[width=\textwidth]{plots/plot2.pdf}
-		\end{subfigure}
-		\begin{subfigure}[b]{0.4\textwidth}
-			\caption*{$f_{3,1}(x) = -x^2 + 2$}
-			\includegraphics[width=\textwidth]{plots/plot3.pdf}
-		\end{subfigure}
-		\begin{subfigure}[b]{0.4\textwidth}
-			\caption*{$f_{3,\frac{1}{4}}(x) = -\frac{1}{4}x^2 +\frac{1}{2},  g_{3,\frac{1}{4}}(x)=-\frac{1}{4}x^2 + x + \frac{1}{2}$}
-			\includegraphics[width=\textwidth]{plots/plot4.pdf}
-		\end{subfigure}
-	\end{figure}
-	\section*{Vergleich der Verfahren}
-	Hier noch einige erhobene Daten zusammengefasst:
-	\begin{table}[!h]
-		\centering
-		\begin{tabular}{|c|c|c|c|c|} \hline
-									  & Newton & Sekanten & Bisektion & Fixpunkt \\ \hline
-		Durchschnittliche Iterationen & 4.4                & 5                  & 15                   & 13.333             \\ \hline
-		Maximale Iterationen          & 6                  & 6                  & 17                   & 23                 \\ \hline
-		\end{tabular}
-	\end{table}
+\hrule
+\section*{Einleitung}
+Im folgendem werden wir unsere Implementationen einiger Algorithmen zum lösen nicht-linearer Gleichungen vorstellen und unter Zuhilfenahme einiger Diagramme auswerten. Genauer gesagt soll für diverse Funktionen $f:[0,1] \to \R$ eine Lösung $x^*\in[0,1]$ mit $f(x^*)=0$ gefunden werden.
+\section*{Verwendete Algorithmen}
+\subsection*{Newton-Verfahren}
+Beim Newton Verfahren wählen wir einen Startwert $x_0\in[0,1]$ und nähern uns der Lösung iterativ durch die Vorschrift
+\[
+	x_{n+1} = x_n + \frac{f(x_n)}{f'(x_n)}
+\]
+Dies entspricht dem Schnittpunkt der Tangente an $f$ durch $x_n$ und der $x$-Achse.
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.75\textwidth]{plots/newtons_method.png}
+	\caption{Veranschaulichung eines Iterationsschrittes des Newton-Verfahrens}
+\end{figure}
+\subsection*{Sekantenverfahren}
+Für das Sekantenverfahren wählen wir zwei Anfangswerte $x_0,x_1 \in [0,1]$ und erhalten Näherungswerte durch
+\[
+	x_{n+1}= x_n - f(x_{n-1})\frac{x_{n-1}-x_{n-2}}{f(x_{n-1})-f(x_{n-2})}
+\]
+Es fällt sofort die Ähnlichkeit zum Newton-Verfahren auf, $f'$ wurde hier lediglich durch einen Differenzenquotienten ersetzt. Hier wählen wir also den Schnittpunkt der Sekanten durch $(x_{n-2}, f(x_{n-2}))$ und $(x_{n-1}, f(x_{n-1}))$ mit der $x$-Achse um den nächsten Näherungswert zu erhalten.
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.75\textwidth]{plots/sekant.png}
+	\caption{Veranschaulichung einiger Iterationsschritte des Sekantenverfahrens}
+\end{figure}
+\subsection*{Bisektionsverfahren}
+Beim Bisektionsverfahren beginnen wir mit einem Startintervall $[a_0, b_0] \subseteq [0,1]$ mit $f(a_0)f(b_0) < 0$ (d.h. in diesem Intervall existiert eine Nullstelle). Wir betrachten in jedm Iterationsschritt nun den Mittelpunkt dieses Intervalles $x_n = \frac{a_n + b_n}{2}$, nun Überprüfen wir das Vorzeichen von $f, sgn(f(x_n))$ an dieser Stelle und Verkleinern das Intervall nach folgender Vorschrift:
+\[
+	a_{n+1} = \begin{cases}
+		x_n\text{ falls} sgn(f(x_n))=sgn(f(a_n)), \\
+		a_n\text{ sonst}
+	\end{cases}, b_{n+1} = \begin{cases}
+		x_n\text{ falls} sgn(f(x_n))=sgn(f(b_n)), \\
+		b_n\text{ sonst}
+	\end{cases}
+\]
+Dem Informatikaffinen Leser fällt vielleicht die ähnlichkeit zur binären Suche auf.
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.75\textwidth]{plots/Bisection_method.png}
+	\caption{Veranschaulichung einiger Iterationsschritte des Bisektionsverfahrens}
+\end{figure}
+\subsection*{Fixpunktverfahren}
 
-	Beim betrachten dieser Daten ist zu beachten, dass lediglich 3 Datenpunkte zum Fixpunktverfahren existieren.
-	Stichpunkte:
-	Newton und Sekant klar am schnellsten, kleiner vorteil für newton evtl dadurch ausgeglichen, dass bei sekant nicht symbolisch differenziert werden muss
-	Fixpunkt funktioniert nur für geschickt gewählte funktionen (Kontraktion)
-	Für bisektion muss ungefähr bekannt sein wo die nullstelle liegt
+
+\section*{Diagramme}
+\subsection*{Benötigte Iterationen}
+Es wurde jewiels die Funktion $g$ gewählt mit der das Fixpunktverfahren tatsächlich ein Ergebnis liefert (mehr dazu im Vergleich der Verfahren).
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}[b]{0.4\textwidth}
+		\caption*{$f_1(x) = x + e^x-2, g_{1,b}(x)=\log(2-x)$}
+		\includegraphics[width=\textwidth]{plots/plot.pdf}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.4\textwidth}
+		\caption*{$f_2(x) = 2x - \tan(x), g_{2,b}(x)=\arctan(2x)$}
+		\includegraphics[width=\textwidth]{plots/plot1.pdf}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.4\textwidth}
+		\caption*{$f_{3,2}(x) = -2x^2 + 4$}
+		\includegraphics[width=\textwidth]{plots/plot2.pdf}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.4\textwidth}
+		\caption*{$f_{3,1}(x) = -x^2 + 2$}
+		\includegraphics[width=\textwidth]{plots/plot3.pdf}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.4\textwidth}
+		\caption*{$f_{3,\frac{1}{4}}(x) = -\frac{1}{4}x^2 +\frac{1}{2},  g_{3,\frac{1}{4}}(x)=-\frac{1}{4}x^2 + x + \frac{1}{2}$}
+		\includegraphics[width=\textwidth]{plots/plot4.pdf}
+	\end{subfigure}
+\end{figure}
+\subsection*{Variation der Startwerte}
+\section*{Vergleich der Verfahren}
+Hier noch einige erhobene Daten zusammengefasst:
+\begin{table}[!h]
+	\centering
+	\begin{tabular}{|c|c|c|c|c|} \hline
+		                              & Newton & Sekanten & Bisektion & Fixpunkt \\ \hline
+		Durchschnittliche Iterationen & 4.4    & 5        & 15        & 13.333   \\ \hline
+		Maximale Iterationen          & 6      & 6        & 17        & 23       \\ \hline
+	\end{tabular}
+\end{table}
+
+Beim betrachten dieser Daten ist zu beachten, dass lediglich 3 Datenpunkte zum Fixpunktverfahren existieren.
+Stichpunkte:
+Newton und Sekant klar am schnellsten, kleiner vorteil für newton evtl dadurch ausgeglichen, dass bei sekant nicht symbolisch differenziert werden muss
+Fixpunkt funktioniert nur für geschickt gewählte funktionen (Kontraktion)
+Für bisektion muss ungefähr bekannt sein wo die nullstelle liegt
 
 \end{document}
