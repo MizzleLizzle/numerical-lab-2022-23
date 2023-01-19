@@ -1,10 +1,9 @@
-from solvers import newtons_error_series, secant_error_series, bisection_error_series, fixed_point_error_series, bisection
-from example_functions import functions, f_2, f_1, f_1_prime, g_1_b
+from solvers import newtons_error_series, secant_error_series, bisection_error_series, fixed_point_error_series
 import matplotlib.pyplot as plt
-from plotting import plot_newton_iterations_by_starting_point, plot_fixed_point_iterations_by_starting_point
 
 def plot_errors(f, f_prime, g, tolerance, index=None):
-    fig, ax = plt.subplots()
+    _, ax = plt.subplots()
+
 
     newtons_errors = newtons_error_series(f, f_prime, 1, 10000, tolerance)
     secant_errors = secant_error_series(f, 0, 1, 10000, tolerance)
@@ -50,26 +49,21 @@ def plot_errors(f, f_prime, g, tolerance, index=None):
     return stats
 
 
-def main():
-    """stats = []
-    for index, function in enumerate(functions):
-        f, f_prime, g = function["f"], function["f_prime"], function["g"]
-        stats.append(plot_errors(f, f_prime, g, 0.0001, index))
-    newton_mean, secant_mean, bisection_mean, fixed_point_mean = 0, 0, 0, 0
-    for stat in stats:
-        newton_mean += stat["newton"]
-        secant_mean += stat["secant"]
-        bisection_mean += stat["bisection"]
-        fixed_point_mean += stat.get("fixed_point", 0)
-    newton_mean /= len(stats)
-    secant_mean /= len(stats)
-    bisection_mean /= len(stats)
-    fixed_point_mean /= len([stat for stat in stats if stat.get("fixed_point", None)])
-    print(
-        f"mean newton: {newton_mean}, mean secant: {secant_mean}, mean bisection: {bisection_mean}, mean fixed point: {fixed_point_mean}")
-"""
-    plot_fixed_point_iterations_by_starting_point(f_1, g_1_b, 10000, 0.0001)
+def plot_newton_iterations_by_starting_point(f, f_prime, max_iteratons, tolerance):
+    starting_points = [y*1/20 for y in range(21)]
+    iterations = []
+    for x in starting_points:
+        iterations.append(len(newtons_error_series(f, f_prime, x, max_iteratons, tolerance)))
+    plt.bar(starting_points, iterations, width=0.03)
+    plt.show()
 
 
-if __name__ == '__main__':
-    main()
+def plot_fixed_point_iterations_by_starting_point(f, g, max_iteratons, tolerance):
+    starting_points = [y*1/20 for y in range(21)]
+    iterations = []
+    for x in starting_points:
+        iterations.append(len(fixed_point_error_series(f, g, x, max_iteratons, tolerance)))
+    plt.bar(starting_points, iterations, width=0.03)
+    plt.show()
+
+def plot_secant_iterations_by_starting_point(f, max_iterations, tolerance):
