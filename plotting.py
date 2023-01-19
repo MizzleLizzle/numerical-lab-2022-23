@@ -1,16 +1,22 @@
 from solvers import newtons_error_series, secant_error_series, bisection_error_series, fixed_point_error_series
 import matplotlib.pyplot as plt
+from typing import Callable
 
-def plot_errors(f, f_prime, g, tolerance, index=None):
+
+def plot_errors(f: Callable[[float], float], f_prime: Callable[[float], float], g: Callable[[float], float], tolerance: float, root: float, index: int = None):
     _, ax = plt.subplots()
 
-
-    newtons_errors = newtons_error_series(f, f_prime, 1, 10000, tolerance)
-    secant_errors = secant_error_series(f, 0, 1, 10000, tolerance)
-    bisection_errors = bisection_error_series(f, 0, 1, 10000, tolerance)
+    x_startingpoint = root - 0.5
+    a_startingpoint, b_startingpoint = root-0.2, root+0.3
+    newtons_errors = newtons_error_series(
+        f, f_prime, x_startingpoint, 10000, tolerance, root)
+    secant_errors = secant_error_series(
+        f, a_startingpoint, b_startingpoint, 10000, tolerance, root)
+    bisection_errors = bisection_error_series(
+        f, a_startingpoint, b_startingpoint, 10000, tolerance, root)
     try:
         fixed_point_errors = fixed_point_error_series(
-            f, g, 1, 10000, tolerance)
+            f, g, x_startingpoint, 10000, tolerance, root)
         ax.plot(range(len(fixed_point_errors)),
                 fixed_point_errors, label='Fixpunkt')
     except:
@@ -28,7 +34,7 @@ def plot_errors(f, f_prime, g, tolerance, index=None):
     ylabels = ['%.3f' % (label._y) for label in ax.get_yticklabels()]
     ax.set_yticklabels(ylabels)
 
-    filename = "plot.pdf" if not index else f"plot{index}.pdf"
+    filename = "error_series_plot.pdf" if not index else f"error_series_plot({index}).pdf"
 
     plt.savefig(
         filename,
@@ -49,11 +55,12 @@ def plot_errors(f, f_prime, g, tolerance, index=None):
     return stats
 
 
-def plot_newton_iterations_by_starting_point(f, f_prime, max_iteratons, tolerance):
+def plot_newton_iterations_by_starting_point(f, f_prime, max_iteratons, tolerance, root):
     starting_points = [y*1/20 for y in range(21)]
     iterations = []
     for x in starting_points:
-        iterations.append(len(newtons_error_series(f, f_prime, x, max_iteratons, tolerance)))
+        iterations.append(len(newtons_error_series(
+            f, f_prime, x, max_iteratons, tolerance)))
     plt.bar(starting_points, iterations, width=0.03)
     plt.show()
 
@@ -62,9 +69,11 @@ def plot_fixed_point_iterations_by_starting_point(f, g, max_iteratons, tolerance
     starting_points = [y*1/20 for y in range(21)]
     iterations = []
     for x in starting_points:
-        iterations.append(len(fixed_point_error_series(f, g, x, max_iteratons, tolerance)))
+        iterations.append(len(fixed_point_error_series(
+            f, g, x, max_iteratons, tolerance)))
     plt.bar(starting_points, iterations, width=0.03)
     plt.show()
+
 
 def plot_secant_iterations_by_starting_point(f, max_iterations, tolerance):
     pass

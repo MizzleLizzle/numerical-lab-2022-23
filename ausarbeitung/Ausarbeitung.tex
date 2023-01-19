@@ -164,29 +164,29 @@ Das Fixpunktverfahren sucht im Gegensatz zu den bisher erwähnten Algorithmen ei
 \]
 \section*{Diagramme}
 \subsection*{Benötigte Iterationen}
-Hier wurde für Verfahren mit einem Benötigtem Startwert Es wurde jewiels die Funktion $g$ gewählt mit der das Fixpunktverfahren tatsächlich ein Ergebnis liefert (mehr dazu im Vergleich der Verfahren).
+Hier wurde für Verfahren mit einem Benötigtem Startwert zur Nullstelle $x'$ der Startwert $x'-0.5$ gewählt. Für Verfahren mit zwei Startwerten $x'-0.2$ und $x'+0.3$. Es wurde jewiels die Funktion $g_*$ gewählt mit der das Fixpunktverfahren tatsächlich ein Ergebnis liefert (mehr dazu im Vergleich der Verfahren).
 
 \begin{figure}[!h]
 	\centering
 	\begin{subfigure}[b]{0.4\textwidth}
 		\caption*{$f_1(x) = x + e^x-2, g_{1,b}(x)=\log(2-x)$}
-		\includegraphics[width=\textwidth]{plots/plot.pdf}
+		\includegraphics[width=\textwidth]{plots/error_series_plot.pdf}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.4\textwidth}
-		\caption*{$f_2(x) = 2x - \tan(x), g_{2,b}(x)=\arctan(2x)$}
-		\includegraphics[width=\textwidth]{plots/plot1.pdf}
+		\caption*{$f_2(x) = 2x - \tan(x), g_{2,b}(x)=\arctan(2x)$, man beachte, dass das Fixpunktverfahren hier gegen eine andere Nullstelle konvergiert als die anderen Verfahren. Wir fanden keinen Startwert mit dem alle verfahren gegen $0$ konvergieren}
+		\includegraphics[width=\textwidth]{plots/error_series_plot(1).pdf}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.4\textwidth}
-		\caption*{$f_{3,2}(x) = -2x^2 + 4$}
-		\includegraphics[width=\textwidth]{plots/plot2.pdf}
+		\caption*{$f_{3,2}(x) = -2x^2 + 4$, Das Fixpunktverfahren divergiert hier.}
+		\includegraphics[width=\textwidth]{plots/error_series_plot(2).pdf}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.4\textwidth}
-		\caption*{$f_{3,1}(x) = -x^2 + 2$}
-		\includegraphics[width=\textwidth]{plots/plot3.pdf}
+		\caption*{$f_{3,1}(x) = -x^2 + 2$, wieder divergiert das Fixpunktverfahren}
+		\includegraphics[width=\textwidth]{plots/error_series_plot(3).pdf}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.4\textwidth}
 		\caption*{$f_{3,\frac{1}{4}}(x) = -\frac{1}{4}x^2 +\frac{1}{2},  g_{3,\frac{1}{4}}(x)=-\frac{1}{4}x^2 + x + \frac{1}{2}$}
-		\includegraphics[width=\textwidth]{plots/plot4.pdf}
+		\includegraphics[width=\textwidth]{plots/error_series_plot(4).pdf}
 	\end{subfigure}
 \end{figure}
 \subsection*{Variation der Startwerte}
