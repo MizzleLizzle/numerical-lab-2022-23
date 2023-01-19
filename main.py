@@ -1,7 +1,7 @@
 from solvers import newtons_error_series, secant_error_series, bisection_error_series, fixed_point_error_series, bisection, fixed_point
 from example_functions import functions, f_2, f_1, f_1_prime, g_1_b
 import matplotlib.pyplot as plt
-from plotting import plot_newton_iterations_by_starting_point, plot_fixed_point_iterations_by_starting_point, plot_errors
+from plotting import *
 
 
 def main():
@@ -22,8 +22,12 @@ def main():
     print(
         f"mean newton: {newton_mean}, mean secant: {secant_mean}, mean bisection: {bisection_mean}, mean fixed point: {fixed_point_mean}")
 
-    """plot_fixed_point_iterations_by_starting_point(f_1, g_1_b, 10000, 0.0001)"""
-    
+    function = functions[0]
+    f, f_prime, g, root = function["f"], function["f_prime"], function["g"], function["root"]
+    plot_fixed_point_iterations_starting_point(f, g, 10000, 0.0001, root)
+    plot_newton_iterations_by_starting_point(f, f_prime, 10000, 0.0001, root)
+    plot_secant_iterations_by_starting_points_distance(f, 10000, 0.0001, root)
+    plot_secant_iterations_by_midpoint_of_starting_points(f, 10000, 0.0001, root)
 
 
 if __name__ == '__main__':
