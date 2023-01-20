@@ -17,17 +17,11 @@
 \usepackage{graphicx} % Required for including pictures
 % \usepackage[figurename=Figure]{caption}
 \usepackage{verbatim} % For comments and other
-\usepackage{amsmath}  % For math
-\usepackage{amssymb}  % For more math
-\usepackage{fullpage} % Set margins and place page numbers at bottom center
 \usepackage{paralist} % paragraph spacing
 \usepackage{listings} % For source code
 \usepackage{libertine}
 \usepackage{array,epsfig}
-\usepackage{amsfonts}
-\usepackage{amssymb}
 \usepackage{amsxtra}
-\usepackage{amsthm}
 \usepackage{mathrsfs}
 \usepackage{color}
 \usepackage{stmaryrd}
@@ -164,7 +158,7 @@ Das Fixpunktverfahren sucht im Gegensatz zu den bisher erwähnten Algorithmen ei
 \]
 \section*{Diagramme}
 \subsection*{Benötigte Iterationen}
-Hier wurde für Verfahren mit einem Benötigtem Startwert zur Nullstelle $x'$ der Startwert $x'-0.5$ gewählt. Für Verfahren mit zwei Startwerten $x'-0.2$ und $x'+0.3$. Es wurde jewiels die Funktion $g_*$ gewählt mit der das Fixpunktverfahren tatsächlich ein Ergebnis liefert (mehr dazu im Vergleich der Verfahren).
+Wir wollen zuerst die benötigten Iterationen der einzelnen Verfahren Gegenüberstellen. Wir wählten als Toleranzgrenze 0.00001, für Verfahren mit einem Benötigtem Startwert, wurde zur Nullstelle $x'$ der Startwert $x'-0.5$ gewählt. Für Verfahren mit zwei Startwerten $x'-0.2$ und $x'+0.3$. Die Wahl der Startwerte mag willkürlich erscheinen, der Trend der in den präsentierten Diagrammen zu erkennen ist deckt sich jedoch mit unseren Ergebnissen für andere Startwerte. Es wurde jewiels die Funktion $g_*$ gewählt mit der das Fixpunktverfahren tatsächlich ein Ergebnis liefert (mehr dazu im Vergleich der Verfahren).
 
 \begin{figure}[!h]
 	\centering
@@ -190,17 +184,47 @@ Hier wurde für Verfahren mit einem Benötigtem Startwert zur Nullstelle $x'$ de
 	\end{subfigure}
 \end{figure}
 \subsection*{Variation der Startwerte}
-\section*{Vergleich der Verfahren}
-Hier noch einige erhobene Daten zusammengefasst:
-\begin{table}[!h]
+Nun wollen wir noch gesondert betrachten, wie sich die Variation der Startwerte auf die benötigte Iterationen der einzelnen Verfahren auswirkt. Wir untersuchten die Funktion $f_1(x)=x+e^x-2$ beziehungsweise $g_{1,b}(x)=log(2-x)$, als Toleranzwert wurde immer 0.00001 gewählt.
+\subsubsection*{Newton-Verfahren}
+Das folgende Diagramm zeigt die vom Newton-Verfahren benötigten Iterationen um eine akzeptable Näherungslösung zu finden, aufgetragen gegen den gewählten Startpunkt.
+\begin{figure}[!h]
 	\centering
-	\begin{tabular}{|c|c|c|c|c|} \hline
-		                              & Newton & Sekanten & Bisektion & Fixpunkt \\ \hline
-		Durchschnittliche Iterationen & 4.4    & 5        & 15        & 13.333   \\ \hline
-		Maximale Iterationen          & 6      & 6        & 17        & 23       \\ \hline
-	\end{tabular}
-\end{table}
-
+	\includegraphics[width=0.75\textwidth]{plots/newton_iterations_by_starting_point.pdf}
+\end{figure}
+Es ist klar zu erkennen, dass das Verfahren schneller beendet ist, je näher der Startwert an der gesuchten Nullstelle liegt.
+\subsubsection*{Sekantenverfahren}
+Als erstes untersuchen wir, wie sich die benötigten Iterationen Verhalten wenn der Mittelpunkt der beiden Startwerte $x_0$ und $x_1$ verändert wird, wir diese Punkte derart, dass immer $x_1-x_0=\frac{1}{20}$
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.75\textwidth]{plots/secant_iterations_by_midpoint_of_starting_points.pdf}
+\end{figure}
+Die benötigten Iterationen sind niedriger je näher der Mittelpunkt der beiden Startwerte an der gesuchten Nullstelle liegt.
+Weiterhin betrachteten wir wie sich der Abstand von $x_0$ und $x_1$ auf die benötigten Iterationen auswirkt. Der Mittelpunkt der Anfagswerte liegt im folgendem Diagramm stets bei $0.5$
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.75\textwidth]{plots/secant_iterations_by_starting_points_distance.pdf}
+\end{figure}
+Wir können erkennen, dass die benötigten Iterationen mit steigendem Abstand größer werden.
+\subsubsection*{Bisektionsverfahren}
+Zuerst betrachten wie sich die größe des Startintervalls $[a_0, b_0]$ auf die benötigten Iterationen des Bisektionsverfahrens auswirkt. Das Intervall wurde hier stets so gewählt, dass die Nullstelle $x'$ eine Disatanz von $1/80$ dazu hat.
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.75\textwidth]{plots/bisection_iterations_by_intervall_size.pdf}
+\end{figure}
+Es ist keine Offensichtliche Relation zwischen diesen Größen zu erkennen. Anschliessend untersuchen wir, wie sich die relative position der Gesuchten Nullstelle innerhalb des Intervalles auf die benötigten Iterationen auswirkt, das Startintervall hat hier immer die Größe 1.
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.75\textwidth]{plots/bisection_iterations_by_relative_position_of_root.pdf}
+\end{figure}
+Wir erkennen, dass an gewissen Positionen, die benötigten Iterationen dramatisch sinken. Diese Positionen sind in der Nähe von $\frac{1}{4}, \frac{1}{2}$ und $\frac{3}{4}$ also Stellen Die nach sehr wenigen Iterationen Mittelpunkt des Intervalls sind.
+\subsubsection*{Fixpunktverfahren}
+Wir untersuchen auch hier die beziehung zwischen Startpunkt und benötigten Iterationen.
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.75\textwidth]{plots/fixed_point_iterations_by_starting_point.pdf}
+\end{figure}
+Wieder können wir erkennen, dass weniger Iterationen benötigt werden, je näher der Startpunkt an der Nullstelle liegt.
+\section*{Vergleich der Verfahren}
 Beim betrachten dieser Daten ist zu beachten, dass lediglich 3 Datenpunkte zum Fixpunktverfahren existieren.
 Stichpunkte:
 Newton und Sekant klar am schnellsten, kleiner vorteil für newton evtl dadurch ausgeglichen, dass bei sekant nicht symbolisch differenziert werden muss
