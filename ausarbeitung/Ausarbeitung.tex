@@ -139,10 +139,10 @@ Es fällt sofort die Ähnlichkeit zum Newton-Verfahren auf, $f'$ wurde hier ledi
 Beim Bisektionsverfahren beginnen wir mit einem Startintervall $[a_0, b_0] \subseteq [0,1]$ mit $f(a_0)f(b_0) < 0$ (d.h. in diesem Intervall existiert eine Nullstelle). Wir betrachten in jedm Iterationsschritt nun den Mittelpunkt dieses Intervalles $x_n = \frac{a_n + b_n}{2}$, nun Überprüfen wir das Vorzeichen von $f, sgn(f(x_n))$ an dieser Stelle und Verkleinern das Intervall nach folgender Vorschrift:
 \[
 	a_{n+1} = \begin{cases}
-		x_n\text{ falls} sgn(f(x_n))=sgn(f(a_n)), \\
+		x_n\text{ falls } sgn(f(x_n))=sgn(f(a_n)), \\
 		a_n\text{ sonst}
 	\end{cases}, b_{n+1} = \begin{cases}
-		x_n\text{ falls} sgn(f(x_n))=sgn(f(b_n)), \\
+		x_n\text{ falls } sgn(f(x_n))=sgn(f(b_n)), \\
 		b_n\text{ sonst}
 	\end{cases}
 \]
@@ -157,33 +157,46 @@ Das Fixpunktverfahren sucht im Gegensatz zu den bisher erwähnten Algorithmen ei
 \[
 	x_{n+1}=g(x_n)
 \]
+
+\newpage
 \section*{Diagramme}
 \subsection*{Benötigte Iterationen}
-Wir wollen zuerst die benötigten Iterationen der einzelnen Verfahren Gegenüberstellen. Wir wählten als Toleranzgrenze 0.00001, für Verfahren mit einem Benötigtem Startwert, wurde zur Nullstelle $x'$ der Startwert $x'-0.5$ gewählt. Für Verfahren mit zwei Startwerten $x'-0.2$ und $x'+0.3$. Die Wahl der Startwerte mag willkürlich erscheinen, der Trend der in den präsentierten Diagrammen zu erkennen ist deckt sich jedoch mit unseren Ergebnissen für andere Startwerte. Es wurde jewiels die Funktion $g_*$ gewählt mit der das Fixpunktverfahren tatsächlich ein Ergebnis liefert (mehr dazu im Vergleich der Verfahren).
+Wir wollen zuerst die benötigten Iterationen der einzelnen Verfahren Gegenüberstellen. Wir wählten als Toleranzgrenze 0.00001, für Verfahren mit einem Benötigtem Startwert, wurde zur Nullstelle $x'$ der Startwert $x'-0.5$ gewählt. Für Verfahren mit zwei Startwerten $x'-0.2$ und $x'+0.3$. Die Wahl der Startwerte mag willkürlich erscheinen, der Trend der in den präsentierten Diagrammen zu erkennen ist deckt sich jedoch mit unseren Ergebnissen für andere Startwerte. Es wurde jeweils die Funktion $g_*$ gewählt mit der das Fixpunktverfahren tatsächlich ein Ergebnis liefert (mehr dazu im Vergleich der Verfahren).
 
 \begin{figure}[H]
 	\centering
-	\begin{subfigure}[b]{0.4\textwidth}
-		\caption*{$f_1(x) = x + e^x-2, g_{1,b}(x)=\log(2-x)$}
-		\includegraphics[width=\textwidth]{plots/error_series_plot.pdf}
-	\end{subfigure}
-	\begin{subfigure}[b]{0.4\textwidth}
-		\caption*{$f_2(x) = 2x - \tan(x), g_{2,b}(x)=\arctan(2x)$, man beachte, dass das Fixpunktverfahren hier gegen eine andere Nullstelle konvergiert als die anderen Verfahren. Wir fanden keinen Startwert mit dem alle verfahren gegen $0$ konvergieren}
-		\includegraphics[width=\textwidth]{plots/error_series_plot(1).pdf}
-	\end{subfigure}
-	\begin{subfigure}[b]{0.4\textwidth}
-		\caption*{$f_{3,2}(x) = -2x^2 + 4$, Das Fixpunktverfahren divergiert hier.}
-		\includegraphics[width=\textwidth]{plots/error_series_plot(2).pdf}
-	\end{subfigure}
-	\begin{subfigure}[b]{0.4\textwidth}
-		\caption*{$f_{3,1}(x) = -x^2 + 2$, wieder divergiert das Fixpunktverfahren}
-		\includegraphics[width=\textwidth]{plots/error_series_plot(3).pdf}
-	\end{subfigure}
-	\begin{subfigure}[b]{0.4\textwidth}
-		\caption*{$f_{3,\frac{1}{4}}(x) = -\frac{1}{4}x^2 +\frac{1}{2},  g_{3,\frac{1}{4}}(x)=-\frac{1}{4}x^2 + x + \frac{1}{2}$}
-		\includegraphics[width=\textwidth]{plots/error_series_plot(4).pdf}
-	\end{subfigure}
+	\includegraphics[width=0.75\textwidth]{plots/error_series_plot.pdf}
+	\caption{$f_1(x) = x + e^x-2, g_{1,b}(x)=\log(2-x)$}
 \end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.75\textwidth]{plots/error_series_plot(1).pdf}
+	\caption{$f_2(x) = 2x - \tan(x), g_{2,b}(x)=\arctan(2x)$}
+\end{figure}
+
+In Abb. 5 kann beobachtet werden, dass das Fixpunktverfahren gegen eine andere Nullstelle konvergiert als die anderen Verfahren. Wir konnten keinen Startwert finden, für den alle Verfahren gegen $0$ konvergieren.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.75\textwidth]{plots/error_series_plot(2).pdf}
+	\caption{$f_{3,2}(x) = -2x^2 + 4$}
+\end{figure}
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.75\textwidth]{plots/error_series_plot(3).pdf}
+	\caption{$f_{3,1}(x) = -x^2 + 2$}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.75\textwidth]{plots/error_series_plot(4).pdf}
+	\caption{$f_{3,\frac{1}{4}}(x) = -\frac{1}{4}x^2 +\frac{1}{2},  g_{3,\frac{1}{4}}(x)=-\frac{1}{4}x^2 + x + \frac{1}{2}$}
+\end{figure}
+In Abbildungen 7 und 8 ist insbesondere zu sehen, dass das Fixpunktverfahren divergiert.
+
+\newpage
 \subsection*{Variation der Startwerte}
 Nun wollen wir noch gesondert betrachten, wie sich die Variation der Startwerte auf die benötigte Iterationen der einzelnen Verfahren auswirkt. Wir untersuchten die Funktion $f_1(x)=x+e^x-2$ beziehungsweise $g_{1,b}(x)=log(2-x)$, als Toleranzwert wurde immer 0.00001 gewählt.
 \subsubsection*{Newton-Verfahren}
@@ -207,19 +220,19 @@ Weiterhin betrachteten wir wie sich der Abstand von $x_0$ und $x_1$ auf die ben�
 \end{figure}
 Wir können erkennen, dass die benötigten Iterationen mit steigendem Abstand größer werden.
 \subsubsection*{Bisektionsverfahren}
-Zuerst betrachten wie sich die größe des Startintervalls $[a_0, b_0]$ auf die benötigten Iterationen des Bisektionsverfahrens auswirkt. Das Intervall wurde hier stets so gewählt, dass die Nullstelle $x'$ eine Disatanz von $1/80$ dazu hat.
+Zuerst betrachten wir wie sich die Größe des Startintervalls $[a_0, b_0]$ auf die benötigten Iterationen des Bisektionsverfahrens auswirkt. Das Intervall wurde hier stets so gewählt, dass die Nullstelle $x'$ eine Distanz von $1/80$ dazu hat.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.75\textwidth]{plots/bisection_iterations_by_intervall_size.pdf}
 \end{figure}
-Es ist keine Offensichtliche Relation zwischen diesen Größen zu erkennen. Anschliessend untersuchen wir, wie sich die relative position der Gesuchten Nullstelle innerhalb des Intervalles auf die benötigten Iterationen auswirkt, das Startintervall hat hier immer die Größe 1.
+Es ist keine Offensichtliche Relation zwischen diesen Größen zu erkennen. Anschliessend untersuchen wir, wie sich die relative Position der gesuchten Nullstelle innerhalb des Intervalles auf die benötigten Iterationen auswirkt, das Startintervall hat hier immer die Größe 1.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.75\textwidth]{plots/bisection_iterations_by_relative_position_of_root.pdf}
 \end{figure}
-Wir erkennen, dass an gewissen Positionen, die benötigten Iterationen dramatisch sinken. Diese Positionen sind in der Nähe von $\frac{1}{4}, \frac{1}{2}$ und $\frac{3}{4}$ also Stellen Die nach sehr wenigen Iterationen Mittelpunkt des Intervalls sind.
+Wir erkennen, dass an gewissen Positionen die benötigten Iterationen dramatisch sinken. Diese Positionen sind in der Nähe von $\frac{1}{4}, \frac{1}{2}$ und $\frac{3}{4}$; also Stellen, die nach sehr wenigen Iterationen Mittelpunkt des Intervalls sind.
 \subsubsection*{Fixpunktverfahren}
-Wir untersuchen auch hier die beziehung zwischen Startpunkt und benötigten Iterationen.
+Wir untersuchen auch hier die Beziehung zwischen Startpunkt und benötigten Iterationen.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.75\textwidth]{plots/fixed_point_iterations_by_starting_point.pdf}
