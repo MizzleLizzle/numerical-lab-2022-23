@@ -1,6 +1,6 @@
 from solvers import newtons_error_series, secant_error_series, bisection_error_series, fixed_point_error_series
 import matplotlib.pyplot as plt
-from typing import Callable
+from typing import Callable, Optional
 
 
 COLORS = {
@@ -11,7 +11,7 @@ COLORS = {
 }
 
 
-def plot_errors(f: Callable[[float], float], f_prime: Callable[[float], float], g: Callable[[float], float], tolerance: float, root: float, index: int = None):
+def plot_errors(f: Callable[[float], float], f_prime: Callable[[float], float], g: Callable[[float], float], tolerance: float, root: float, index: Optional[int] = None):
     plt.figure()
     _, ax = plt.subplots()
 

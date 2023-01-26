@@ -1,6 +1,4 @@
-from solvers import newtons_error_series, secant_error_series, bisection_error_series, fixed_point_error_series, bisection, fixed_point
-from example_functions import functions, f_2, f_1, f_1_prime, g_1_b
-import matplotlib.pyplot as plt
+from example_functions import functions
 from plotting import *
 import os
 

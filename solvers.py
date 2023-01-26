@@ -47,7 +47,7 @@ def secant_error_series(f: Callable[[float], float], x_0: float, x_1: float, max
 
 def bisection(f: Callable[[float], float], a: float, b: float, max_iterations: int, tolerance: float) -> float:
     def sign(y: float) -> int:
-        return y / abs(y) if y != 0 else 0
+        return int(y / abs(y)) if y != 0 else 0
 
     for _ in range(max_iterations):
         x = (a+b)/2
@@ -62,7 +62,7 @@ def bisection(f: Callable[[float], float], a: float, b: float, max_iterations: i
 
 def bisection_error_series(f: Callable[[float], float], a: float, b: float, max_iterations: int, tolerance: float, root: float) -> list[float]:
     def sign(y: float) -> int:
-        return y / abs(y) if y != 0 else 0
+        return int(y / abs(y)) if y != 0 else 0
 
     errors = [b]
     for _ in range(max_iterations):
