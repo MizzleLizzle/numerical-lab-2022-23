@@ -119,22 +119,26 @@ Beim Newton Verfahren wählen wir einen Startwert $x_0\in[0,1]$ und nähern uns 
 	x_{n+1} = x_n + \frac{f(x_n)}{f'(x_n)}
 \]
 Dies entspricht dem Schnittpunkt der Tangente an $f$ durch $x_n$ und der $x$-Achse.
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.75\textwidth]{plots/newtons_method.png}
 	\caption{Veranschaulichung eines Iterationsschrittes des Newton-Verfahrens}
 \end{figure}
+
 \subsection*{Sekantenverfahren}
 Für das Sekantenverfahren wählen wir zwei Anfangswerte $x_0,x_1 \in [0,1]$ und erhalten Näherungswerte durch
 \[
 	x_{n+1}= x_n - f(x_{n-1})\frac{x_{n-1}-x_{n-2}}{f(x_{n-1})-f(x_{n-2})}
 \]
 Es fällt sofort die Ähnlichkeit zum Newton-Verfahren auf, $f'$ wurde hier lediglich durch einen Differenzenquotienten ersetzt. Hier wählen wir also den Schnittpunkt der Sekanten durch $(x_{n-2}, f(x_{n-2}))$ und $(x_{n-1}, f(x_{n-1}))$ mit der $x$-Achse um den nächsten Näherungswert zu erhalten.
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.75\textwidth]{plots/sekant.png}
 	\caption{Veranschaulichung einiger Iterationsschritte des Sekantenverfahrens}
 \end{figure}
+
 \subsection*{Bisektionsverfahren}
 Beim Bisektionsverfahren beginnen wir mit einem Startintervall $[a_0, b_0] \subseteq [0,1]$ mit $f(a_0)f(b_0) < 0$ (d.h. in diesem Intervall existiert eine Nullstelle). Wir betrachten in jedm Iterationsschritt nun den Mittelpunkt dieses Intervalles $x_n = \frac{a_n + b_n}{2}$, nun Überprüfen wir das Vorzeichen von $f, sgn(f(x_n))$ an dieser Stelle und Verkleinern das Intervall nach folgender Vorschrift:
 \[
@@ -147,11 +151,13 @@ Beim Bisektionsverfahren beginnen wir mit einem Startintervall $[a_0, b_0] \subs
 	\end{cases}
 \]
 Dem informatikaffinen Leser fällt vielleicht die ähnlichkeit zur binären Suche auf.
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.75\textwidth]{plots/Bisection_method.png}
 	\caption{Veranschaulichung einiger Iterationsschritte des Bisektionsverfahrens}
 \end{figure}
+
 \subsection*{Fixpunktverfahren}
 Das Fixpunktverfahren sucht im Gegensatz zu den bisher erwähnten Algorithmen eine Lösung der Gleichung $g(x)=x$. Daher muss erst $f(x)=0$ entsprechend umgeformt werden. Anschliessend wählen wir einen Anfangswert $x_0\in[0,1]$ und wenden wiederholt $g$ darauf an:
 \[
@@ -183,17 +189,18 @@ In Abb. 5 kann beobachtet werden, dass das Fixpunktverfahren gegen eine andere N
 	\caption{$f_{3,2}(x) = -2x^2 + 4$}
 \end{figure}
 
-
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.75\textwidth]{plots/error_series_plot(3).pdf}
 	\caption{$f_{3,1}(x) = -x^2 + 2$}
 \end{figure}
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.75\textwidth]{plots/error_series_plot(4).pdf}
 	\caption{$f_{3,\frac{1}{4}}(x) = -\frac{1}{4}x^2 +\frac{1}{2},  g_{3,\frac{1}{4}}(x)=-\frac{1}{4}x^2 + x + \frac{1}{2}$}
 \end{figure}
+
 In Abbildungen 7 und 8 ist insbesondere zu sehen, dass das Fixpunktverfahren divergiert.
 
 \newpage
@@ -201,10 +208,12 @@ In Abbildungen 7 und 8 ist insbesondere zu sehen, dass das Fixpunktverfahren div
 Nun wollen wir noch gesondert betrachten, wie sich die Variation der Startwerte auf die benötigte Iterationen der einzelnen Verfahren auswirkt. Wir untersuchten die Funktion $f_1(x)=x+e^x-2$ beziehungsweise $g_{1,b}(x)=log(2-x)$, als Toleranzwert wurde immer 0.00001 gewählt.
 \subsubsection*{Newton-Verfahren}
 Das folgende Diagramm zeigt die vom Newton-Verfahren benötigten Iterationen um eine akzeptable Näherungslösung zu finden, aufgetragen gegen den gewählten Startpunkt.
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.75\textwidth]{plots/newton_iterations_by_starting_point.pdf}
 \end{figure}
+
 Es ist klar zu erkennen, dass das Verfahren schneller beendet ist, je näher der Startwert an der gesuchten Nullstelle liegt.
 \subsubsection*{Sekantenverfahren}
 Als erstes untersuchen wir, wie sich die benötigten Iterationen Verhalten wenn der Mittelpunkt der beiden Startwerte $x_0$ und $x_1$ verändert wird, wir diese Punkte derart, dass immer $x_1-x_0=\frac{1}{20}$
@@ -221,22 +230,28 @@ Weiterhin betrachteten wir wie sich der Abstand von $x_0$ und $x_1$ auf die ben�
 Wir können erkennen, dass die benötigten Iterationen mit steigendem Abstand größer werden.
 \subsubsection*{Bisektionsverfahren}
 Zuerst betrachten wir wie sich die Größe des Startintervalls $[a_0, b_0]$ auf die benötigten Iterationen des Bisektionsverfahrens auswirkt. Das Intervall wurde hier stets so gewählt, dass die Nullstelle $x'$ eine Distanz von $1/80$ dazu hat.
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.75\textwidth]{plots/bisection_iterations_by_intervall_size.pdf}
 \end{figure}
+
 Es ist keine Offensichtliche Relation zwischen diesen Größen zu erkennen. Anschliessend untersuchen wir, wie sich die relative Position der gesuchten Nullstelle innerhalb des Intervalles auf die benötigten Iterationen auswirkt, das Startintervall hat hier immer die Größe 1.
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.75\textwidth]{plots/bisection_iterations_by_relative_position_of_root.pdf}
 \end{figure}
+
 Wir erkennen, dass an gewissen Positionen die benötigten Iterationen dramatisch sinken. Diese Positionen sind in der Nähe von $\frac{1}{4}, \frac{1}{2}$ und $\frac{3}{4}$; also Stellen, die nach sehr wenigen Iterationen Mittelpunkt des Intervalls sind.
 \subsubsection*{Fixpunktverfahren}
 Wir untersuchen auch hier die Beziehung zwischen Startpunkt und benötigten Iterationen.
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.75\textwidth]{plots/fixed_point_iterations_by_starting_point.pdf}
 \end{figure}
+
 Wieder können wir erkennen, dass weniger Iterationen benötigt werden, je näher der Startpunkt an der Nullstelle liegt.
 \section*{Vergleich der Verfahren}
 In unseren Experimenten ist das Newton Verfahren im Durchschnitt am performantesten und relativ insensitiv gegenüber der Wahl des Startwertes. Allerdings ist zu beachten, dass bei diesem Verfahren die Ableitung der betrachteten Funktion benötigt wird; will man daher eine ``vollautomatische`` Version nutzen, muss zusätzlich noch algorithmisch differenziert werden. \\
