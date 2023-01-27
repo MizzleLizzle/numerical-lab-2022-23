@@ -13,7 +13,6 @@ COLORS = {
 
 def plot_errors(f: Callable[[float], float], f_prime: Callable[[float], float], g: Callable[[float], float], tolerance: float, root: float, index: Optional[int] = None):
     plt.figure()
-    _, ax = plt.subplots()
 
     x_startingpoint = root - 0.5
     a_startingpoint, b_startingpoint = root-0.2, root+0.3
@@ -27,22 +26,23 @@ def plot_errors(f: Callable[[float], float], f_prime: Callable[[float], float], 
     try:
         fixed_point_errors = fixed_point_error_series(
             f, g, x_startingpoint, 10000, tolerance, root)
-        ax.plot(range(len(fixed_point_errors)),
-                fixed_point_errors, label='Fixpunkt', color=COLORS["fixed_point"])
+        plt.plot(range(len(fixed_point_errors)),
+                 fixed_point_errors, label='Fixpunkt', color=COLORS["fixed_point"])
     except:
         fixed_point_errors = None
 
-    ax.plot(range(len(newtons_errors)), newtons_errors, label='Newton\'s', color=COLORS["newton"])
-    ax.plot(range(len(secant_errors)), secant_errors, label='Sekanten', color=COLORS["secant"])
-    ax.plot(range(len(bisection_errors)), bisection_errors, label='Bisektion', color=COLORS["bisection"])
+    plt.plot(range(len(newtons_errors)), newtons_errors,
+             label='Newton\'s', color=COLORS["newton"])
+    plt.plot(range(len(secant_errors)), secant_errors,
+             label='Sekanten', color=COLORS["secant"])
+    plt.plot(range(len(bisection_errors)), bisection_errors,
+             label='Bisektion', color=COLORS["bisection"])
 
-    ax.set(xlabel='Iterationen', ylabel='Fehler')
+    plt.xlabel('Iterations')
+    plt.ylabel('Error')
 
-    ax.legend()
-    ax.set_yscale('symlog')
-
-    ylabels = ['%.3f' % (label._y) for label in ax.get_yticklabels()]
-    ax.set_yticklabels(ylabels)
+    plt.legend()
+    plt.yscale('log')
 
     filename = "plots/error_series_plot.pdf" if not index else f"plots/error_series_plot({index}).pdf"
 
