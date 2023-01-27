@@ -25,8 +25,7 @@ def main():
     secant_mean /= len(stats)
     bisection_mean /= len(stats)
     fixed_point_mean /= len([stat for stat in stats if stat.get("fixed_point", None)])
-    print(
-        f"mean newton: {newton_mean}, mean secant: {secant_mean}, mean bisection: {bisection_mean}, mean fixed point: {fixed_point_mean}")
+    print(f"mean newton: {newton_mean}, mean secant: {secant_mean}, mean bisection: {bisection_mean}, mean fixed point: {fixed_point_mean}")
 
     function = functions[0]
     f, f_prime, g, root = function["f"], function["f_prime"], function["g"], function["root"]
